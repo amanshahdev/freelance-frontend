@@ -1,0 +1,413 @@
+{
+  "info": {
+    "name": "Freelance Marketplace API",
+    "description": "Complete Postman collection for the Freelance Marketplace backend. \n\n**Setup:**\n1. Import this collection\n2. Set the `baseUrl` variable to `http://localhost:5000/api`\n3. Run \"Signup Client\" → copy token → set `clientToken` variable\n4. Run \"Signup Freelancer\" → copy token → set `freelancerToken` variable\n5. Run \"Create Job\" → copy `_id` → set `jobId` variable\n6. Run \"Apply to Job\" → copy `_id` → set `applicationId` variable",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl",         "value": "http://localhost:5000/api" },
+    { "key": "clientToken",     "value": "" },
+    { "key": "freelancerToken", "value": "" },
+    { "key": "jobId",           "value": "" },
+    { "key": "applicationId",   "value": "" },
+    { "key": "userId",          "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup — Client",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/signup",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alice Client\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"Secret123\",\n  \"role\": \"client\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Signup — Freelancer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/signup",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bob Freelancer\",\n  \"email\": \"bob@example.com\",\n  \"password\": \"Secret123\",\n  \"role\": \"freelancer\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login — Client",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"Secret123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login — Freelancer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"bob@example.com\",\n  \"password\": \"Secret123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Me (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{baseUrl}}/auth/change-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"Secret123\",\n  \"newPassword\": \"NewSecret456\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Freelancers (Public)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/freelancers?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "freelancers"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Freelancers by Skill",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/freelancers?skills=React,Node.js&minRate=20&maxRate=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "freelancers"],
+              "query": [
+                { "key": "skills",  "value": "React,Node.js" },
+                { "key": "minRate", "value": "20" },
+                { "key": "maxRate", "value": "100" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID (Public)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/{{userId}}"
+          }
+        },
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/{{userId}}/stats"
+          }
+        },
+        {
+          "name": "Update Profile (Protected)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{freelancerToken}}" }
+            ],
+            "url": "{{baseUrl}}/users/profile",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"Senior React developer with 5 years of experience building scalable web applications.\",\n  \"skills\": [\"React\", \"Node.js\", \"TypeScript\", \"MongoDB\"],\n  \"hourlyRate\": 75,\n  \"location\": \"Remote\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Add Portfolio Item (Freelancer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{freelancerToken}}" }
+            ],
+            "url": "{{baseUrl}}/users/portfolio",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"E-commerce Platform\",\n  \"url\": \"https://github.com/bob/ecom\",\n  \"description\": \"Full-stack React + Node.js shop with Stripe integration\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Clients (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{baseUrl}}/users/clients"
+          }
+        },
+        {
+          "name": "Delete Account (Soft)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{baseUrl}}/users/account"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "Get Job Categories (Public)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/jobs/categories"
+          }
+        },
+        {
+          "name": "Browse All Open Jobs (Public)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/jobs?page=1&limit=10&status=open",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs"],
+              "query": [
+                { "key": "page",   "value": "1" },
+                { "key": "limit",  "value": "10" },
+                { "key": "status", "value": "open" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Jobs (Text + Filters)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/jobs?search=react dashboard&category=Web Development&experienceLevel=intermediate&location=remote&minBudget=500",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs"],
+              "query": [
+                { "key": "search",          "value": "react dashboard" },
+                { "key": "category",        "value": "Web Development" },
+                { "key": "experienceLevel", "value": "intermediate" },
+                { "key": "location",        "value": "remote" },
+                { "key": "minBudget",       "value": "500" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Job (Client)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{baseUrl}}/jobs",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Build a React Analytics Dashboard\",\n  \"description\": \"We need an experienced React developer to build a fully functional analytics dashboard. The dashboard should include interactive charts using Recharts, date range filters, CSV data export functionality, and a responsive layout. Figma design will be provided. API endpoints are already built in Node.js.\",\n  \"category\": \"Web Development\",\n  \"skills\": [\"React\", \"TypeScript\", \"Recharts\", \"Tailwind CSS\"],\n  \"budgetType\": \"fixed\",\n  \"budgetMin\": 800,\n  \"budgetMax\": 1500,\n  \"deadline\": \"2025-06-01T00:00:00.000Z\",\n  \"location\": \"remote\",\n  \"experienceLevel\": \"intermediate\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Single Job (Public)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/jobs/{{jobId}}"
+          }
+        },
+        {
+          "name": "Update Job (Client)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{baseUrl}}/jobs/{{jobId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budgetMax\": 2000,\n  \"description\": \"We need an experienced React developer to build a fully functional analytics dashboard with advanced filtering, real-time data, and PDF export in addition to CSV.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get My Jobs (Client)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/my-jobs?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", "my-jobs"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Job (Client)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{baseUrl}}/jobs/{{jobId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "Apply to Job (Freelancer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{freelancerToken}}" }
+            ],
+            "url": "{{baseUrl}}/applications",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": \"{{jobId}}\",\n  \"coverLetter\": \"Hi, I am an experienced React developer with 5 years of professional experience building analytics dashboards and data visualisation tools. I have worked with Recharts extensively and have delivered similar projects on time and within budget. I am confident I can deliver a polished, high-performance dashboard that meets all your requirements. I would love to discuss the project further.\",\n  \"proposedRate\": 1200,\n  \"estimatedDays\": 14\n}"
+            }
+          }
+        },
+        {
+          "name": "My Applications (Freelancer)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{freelancerToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/applications/my-applications?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["applications", "my-applications"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Job Applicants (Client)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{baseUrl}}/applications/job/{{jobId}}"
+          }
+        },
+        {
+          "name": "Get Single Application",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{clientToken}}" }],
+            "url": "{{baseUrl}}/applications/{{applicationId}}"
+          }
+        },
+        {
+          "name": "Shortlist Applicant (Client)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{baseUrl}}/applications/{{applicationId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"shortlisted\",\n  \"clientNote\": \"Strong portfolio. Scheduling an interview.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Accept Applicant (Client)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{baseUrl}}/applications/{{applicationId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"accepted\",\n  \"clientNote\": \"Great interview. Starting immediately.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Reject Applicant (Client)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{clientToken}}" }
+            ],
+            "url": "{{baseUrl}}/applications/{{applicationId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"rejected\",\n  \"clientNote\": \"Budget mismatch.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Withdraw Application (Freelancer)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{freelancerToken}}" }],
+            "url": "{{baseUrl}}/applications/{{applicationId}}/withdraw"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/health"
+          }
+        }
+      ]
+    }
+  ]
+}
