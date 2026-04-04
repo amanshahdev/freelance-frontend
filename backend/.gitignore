@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 
+
 # Environment variables — NEVER commit real .env files
 .env
 .env.local
@@ -25,3 +26,6 @@ coverage/
 # Build output (if any)
 dist/
 build/
+
+
+seedData/
