@@ -56,7 +56,7 @@ app.use(cors({
   origin: process.env.CLIENT_URL || '*',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: false,
+  credentials: true,
 }));
 
 app.use(express.json({ limit: '10mb' }));
