@@ -12,8 +12,8 @@
 .auth-bg-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(20,184,166,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,184,166,0.04) 1px, transparent 1px);
   background-size: 50px 50px;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   pointer-events: none;
@@ -21,7 +21,7 @@
 .auth-glow {
   position: absolute; top: 30%; left: 50%; transform: translateX(-50%);
   width: 500px; height: 300px;
-  background: radial-gradient(ellipse, rgba(245,158,11,0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(20,184,166,0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 .auth-card {
@@ -33,7 +33,7 @@
   max-width: 440px;
   position: relative;
   z-index: 1;
-  box-shadow: var(--shadow-lg), 0 0 60px rgba(245,158,11,0.05);
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(20,184,166,0.05);
 }
 .auth-logo { display: flex; justify-content: center; margin-bottom: 28px; }
 .auth-logo-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); }

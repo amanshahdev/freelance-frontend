@@ -81,7 +81,7 @@ export default function ClientDashboard() {
             <Link key={a.to} to={a.to} style={{ textDecoration: 'none' }}>
               <div className={`card card-hover`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 background: a.primary ? 'var(--amber-dim)' : undefined,
-                borderColor: a.primary ? 'rgba(245,158,11,0.35)' : undefined }}>
+                borderColor: a.primary ? 'rgba(20,184,166,0.35)' : undefined }}>
                 <div>
                   <div style={{ fontWeight: 600, color: a.primary ? 'var(--amber)' : 'var(--text-primary)' }}>{a.label}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>{a.desc}</div>
