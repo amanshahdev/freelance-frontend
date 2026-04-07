@@ -13,12 +13,12 @@
 
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const BASE_URL = process.env.REACT_APP_API_URL || 'https://freelance-backend-1jpd.onrender.com/api';
 
 // ── Axios instance ──────────────────────────────────────────────────────────
 const api = axios.create({
   baseURL: BASE_URL,
-  timeout: 60000,
+  timeout: 600000,
   headers: { 'Content-Type': 'application/json' },
 });
 
