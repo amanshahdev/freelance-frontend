@@ -3,7 +3,7 @@
  * Multi-section form for clients to post a new job.
  */
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { DashboardLayout, PageHeader } from "../components/SharedComponents";
 import { jobAPI, getErrorMessage } from "../services/api";
@@ -43,7 +43,16 @@ const INITIAL = {
 
 export default function CreateJobPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState(INITIAL);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const hireFreelancerName = searchParams.get("freelancerName");
+  const hireFreelancerId = searchParams.get("freelancerId");
+  const [form, setForm] = useState(() => ({
+    ...INITIAL,
+    description: hireFreelancerName
+      ? `I found ${hireFreelancerName} on FreelanceHub and would like to discuss a project.\n\nProject scope:\n-\n\nTimeline:\n-\n\nBudget:\n-`
+      : "",
+  }));
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -133,8 +142,44 @@ export default function CreateJobPage() {
       <div className="page-enter" style={{ maxWidth: 760, margin: "0 auto" }}>
         <PageHeader
           title="Post a New Job"
-          subtitle="Tell freelancers what you need"
+          subtitle={
+            hireFreelancerName
+              ? `Start a hire request for ${hireFreelancerName}`
+              : "Tell freelancers what you need"
+          }
         />
+
+        {hireFreelancerName && (
+          <div
+            className="card"
+            style={{
+              marginBottom: 24,
+              borderColor: "var(--amber)",
+              background: "var(--amber-dim)",
+            }}
+          >
+            <div
+              style={{
+                fontWeight: 700,
+                color: "var(--amber)",
+                marginBottom: 6,
+              }}
+            >
+              Hiring context
+            </div>
+            <div
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: 14,
+                lineHeight: 1.6,
+              }}
+            >
+              You started this job from {hireFreelancerName}'s profile.
+              {hireFreelancerId ? ` Freelancer ID: ${hireFreelancerId}.` : ""}
+              Fill in the job details below to send out your hire request.
+            </div>
+          </div>
+        )}
 
         <form
           onSubmit={handleSubmit}

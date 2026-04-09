@@ -57,6 +57,8 @@ export default function ProfilePage() {
     );
   if (!profile) return null;
 
+  const canHire = me?.role === "client" && profile.role === "freelancer";
+
   return (
     <div className="page-wrapper">
       <Navbar />
@@ -127,6 +129,15 @@ export default function ProfilePage() {
                 >
                   <FiDollarSign size={14} /> ${profile.hourlyRate}/hr
                 </div>
+              )}
+              {canHire && (
+                <Link
+                  to={`/jobs/create?freelancerId=${encodeURIComponent(profile._id)}&freelancerName=${encodeURIComponent(profile.name)}`}
+                  className="btn btn-primary btn-sm"
+                  style={{ marginTop: 16, justifyContent: "center" }}
+                >
+                  Hire Talent
+                </Link>
               )}
               {isOwnProfile && (
                 <Link

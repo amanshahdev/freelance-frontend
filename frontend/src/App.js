@@ -188,16 +188,16 @@ export default function App() {
           position="top-right"
           toastOptions={{
             style: {
-              background: "#FFFFFF",
-              color: "#0F172A",
-              border: "1px solid rgba(15,23,42,0.1)",
+              background: "#1A1A26",
+              color: "#F0EEE8",
+              border: "1px solid rgba(255,255,255,0.1)",
               fontFamily: "DM Sans, sans-serif",
               fontSize: "14px",
             },
             success: {
-              iconTheme: { primary: "#14B8A6", secondary: "#FFFFFF" },
+              iconTheme: { primary: "#14B8A6", secondary: "#0A0A0F" },
             },
-            error: { iconTheme: { primary: "#EF4444", secondary: "#FFFFFF" } },
+            error: { iconTheme: { primary: "#EF4444", secondary: "#fff" } },
           }}
         />
         <AppRoutes />

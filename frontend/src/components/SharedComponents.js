@@ -163,7 +163,7 @@ export function Pagination({ pagination, onPageChange }) {
             className="btn btn-sm"
             style={{
               background: p === page ? "var(--amber)" : "var(--bg-raised)",
-              color: p === page ? "#FFFFFF" : "var(--text-secondary)",
+              color: p === page ? "#0A0A0F" : "var(--text-secondary)",
               border: "1px solid var(--border)",
               minWidth: 36,
             }}
@@ -252,8 +252,8 @@ export function ConfirmModal({
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "rgba(241,245,249,0.78)",
-        backdropFilter: "blur(8px)",
+        background: "rgba(0,0,0,0.7)",
+        backdropFilter: "blur(4px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
