@@ -137,8 +137,8 @@ export default function EditProfilePage() {
       toast.error("Passwords do not match");
       return;
     }
-    if (pwForm.newPassword.length < 8) {
-      toast.error("Password must be 8+ characters");
+    if (pwForm.newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters");
       return;
     }
     setSavingPw(true);
@@ -478,7 +478,7 @@ export default function EditProfilePage() {
                   <input
                     className="form-input"
                     type="password"
-                    placeholder="Min 8 chars, 1 uppercase, 1 number"
+                    placeholder="Min 6 characters"
                     value={pwForm.newPassword}
                     onChange={(e) =>
                       setPwForm((p) => ({ ...p, newPassword: e.target.value }))

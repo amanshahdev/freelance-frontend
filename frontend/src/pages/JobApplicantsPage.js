@@ -462,7 +462,7 @@ export default function JobApplicantsPage() {
             position: "fixed",
             inset: 0,
             zIndex: 1000,
-            background: "rgba(0,0,0,0.7)",
+            background: "rgba(241,245,249,0.78)",
             backdropFilter: "blur(4px)",
             display: "flex",
             alignItems: "center",

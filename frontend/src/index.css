@@ -1,38 +1,38 @@
 /* ============================================================
-   index.css — Global Design System
-   Aesthetic: Dark editorial marketplace — ink-black surfaces,
+  index.css — Global Design System
+  Aesthetic: Light editorial marketplace — soft surfaces,
   cool teal accent (#14B8A6), sharp typography with
-   "DM Serif Display" headings + "DM Sans" body copy.
-   Inspired by high-end creative marketplaces.
-   ============================================================ */
+  "DM Serif Display" headings + "DM Sans" body copy.
+  Inspired by high-end creative marketplaces.
+  ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap");
 
 /* ── CSS Variables ─────────────────────────────────────────── */
 :root {
-  --bg-base: #0a0a0f;
-  --bg-surface: #12121a;
-  --bg-raised: #1a1a26;
-  --bg-hover: #22222f;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  --bg-base: #f7f8fc;
+  --bg-surface: #ffffff;
+  --bg-raised: #f1f5f9;
+  --bg-hover: #e8eef6;
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.14);
 
   --amber: #14b8a6;
   --amber-light: #5eead4;
-  --amber-dim: rgba(20, 184, 166, 0.15);
+  --amber-dim: rgba(20, 184, 166, 0.12);
   --amber-glow: rgba(20, 184, 166, 0.08);
 
-  --text-primary: #f0eee8;
-  --text-secondary: #9a9aa8;
-  --text-muted: #5a5a6e;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
 
   --success: #10b981;
-  --success-dim: rgba(16, 185, 129, 0.12);
+  --success-dim: rgba(16, 185, 129, 0.1);
   --error: #ef4444;
-  --error-dim: rgba(239, 68, 68, 0.12);
+  --error-dim: rgba(239, 68, 68, 0.1);
   --warning: #14b8a6;
   --info: #3b82f6;
-  --info-dim: rgba(59, 130, 246, 0.12);
+  --info-dim: rgba(59, 130, 246, 0.1);
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -40,10 +40,10 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --shadow-amber: 0 0 24px rgba(20, 184, 166, 0.2);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+  --shadow-amber: 0 0 24px rgba(20, 184, 166, 0.16);
 
   --font-display: "DM Serif Display", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
@@ -75,6 +75,19 @@ body {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  color-scheme: light;
+  background-image:
+    radial-gradient(
+      circle at top left,
+      rgba(20, 184, 166, 0.1),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(59, 130, 246, 0.06),
+      transparent 22%
+    );
+  background-attachment: fixed;
 }
 
 img {
@@ -108,11 +121,11 @@ ol {
   background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-raised);
+  background: var(--border-strong);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--bg-hover);
+  background: var(--text-muted);
 }
 
 /* ── Typography ────────────────────────────────────────────── */
@@ -183,7 +196,7 @@ h6 {
 
 .btn-primary {
   background: var(--amber);
-  color: #0a0a0f;
+  color: #ffffff;
 }
 .btn-primary:hover:not(:disabled) {
   background: var(--amber-light);
@@ -321,22 +334,22 @@ h6 {
 .badge-amber {
   background: var(--amber-dim);
   color: var(--amber);
-  border: 1px solid rgba(20, 184, 166, 0.25);
+  border: 1px solid rgba(20, 184, 166, 0.22);
 }
 .badge-green {
   background: var(--success-dim);
   color: var(--success);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.18);
 }
 .badge-red {
   background: var(--error-dim);
   color: var(--error);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.18);
 }
 .badge-blue {
   background: var(--info-dim);
   color: var(--info);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.18);
 }
 .badge-muted {
   background: var(--bg-hover);
